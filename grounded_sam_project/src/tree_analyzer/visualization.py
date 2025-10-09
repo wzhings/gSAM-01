@@ -42,7 +42,7 @@ def plot_detections_matplotlib(
     plt.imshow(annotated_image)
     plt.axis('off')
     if save_path:
-        os.mkdir('output', exist_ok=True) # Ensure output directory exists
+        os.makedirs('output', exist_ok=True) # Ensure output directory exists
         plt.savefig(save_path, bbox_inches='tight')
     plt.show()
 
