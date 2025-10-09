@@ -9,7 +9,7 @@ sentence-transformers
 # Other standard dependencies
 torch
 opencv-python-headless
-numpy
+numpy==1.26.4
 Pillow
 plotly
 matplotlib
