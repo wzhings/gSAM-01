@@ -11,17 +11,22 @@ def detect(
     image: Image.Image,
     labels: List[str],
     threshold: float = 0.3,
-    detector_id: str = "IDEA-Research/grounding-dino-tiny"
-) -> List[DetectionResult]:
-    """Uses Grounding DINO for zero-shot object detection."""
+    detector_id: Optional[str] = None
+) -> List[Dict[str, Any]]:
+    """
+    Uses Grounding DINO for zero-shot object detection.
+    """
     device = "cuda" if torch.cuda.is_available() else "cpu"
+    detector_id = detector_id if detector_id is not None else "IDEA-Research/grounding-dino-tiny"
     object_detector = pipeline(model=detector_id, task="zero-shot-object-detection", device=device)
     
     # Ensure labels end with a period for better performance
-    processed_labels = [label if label.endswith(".") else label + "." for label in labels]
+    processed_labels = [label if label.endswith(".") else label+"." for label in labels]
     
     results = object_detector(image, candidate_labels=processed_labels, threshold=threshold)
-    return [DetectionResult.from_dict(result) for result in results]
+    results = [DetectionResult.from_dict(result) for result in results]
+
+    return results
 
 def segment(
     image: Image.Image,
