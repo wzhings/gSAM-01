@@ -1,7 +1,8 @@
 # Tree Management Project 01 - Measurement
 
 
-## How to run the codes (V1)
+## How to run the codes (V1) 
+This is listed on the `main` branch
 1. `aruco_marker_generator.py`: generate aruco markers
 2. `aruco_detect.py`: detect and measure the real object attributes by `aruco marker`
 3. `square_detect.py`: detect and measure the real object attributes by `sqaure`
