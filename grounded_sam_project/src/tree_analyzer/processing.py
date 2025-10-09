@@ -19,7 +19,8 @@ def get_boxes_from_detections(results: DetectionResult) -> List[List[List[float]
     """Extracts bounding box coordinates from a list of detection results."""
     boxes = []
     for result in results:
-        xyxy = result.box.xyxy
+        # xyxy = result.box.xyxy
+        xyxy = [float(coord) for coord in result.box.xyxy]
         boxes.append(xyxy)
 
     return [boxes]
