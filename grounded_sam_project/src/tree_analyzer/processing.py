@@ -8,11 +8,11 @@ import requests
 from .data_structures import DetectionResult
 
 def load_image(image_str: str) -> Image.Image:
-    """Loads an image from a URL or a local file path."""
     if image_str.startswith("http"):
         image = Image.open(requests.get(image_str, stream=True).raw).convert("RGB")
     else:
         image = Image.open(image_str).convert("RGB")
+
     return image
 
 def get_boxes_from_detections(results: DetectionResult) -> List[List[List[float]]]:
@@ -21,6 +21,7 @@ def get_boxes_from_detections(results: DetectionResult) -> List[List[List[float]
     for result in results:
         xyxy = result.box.xyxy
         boxes.append(xyxy)
+
     return [boxes]
 
 def mask_to_polygon(mask: np.ndarray) -> List[List[int]]:
