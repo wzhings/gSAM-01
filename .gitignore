@@ -1,0 +1,7 @@
+markers/
+photos/
+*.pyc
+__pycache__/
+.vscode/
+env/
+.venv/

@@ -1,0 +1,13 @@
+# requirements.txt
+
+# Install transformers directly from the main branch of the GitHub repository
+git+https://github.com/huggingface/transformers
+
+# Other standard dependencies
+torch
+opencv-python-headless
+numpy
+Pillow
+plotly
+matplotlib
+requests
