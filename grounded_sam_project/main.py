@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-import cv2
+import cv2, os
 
 # Import functions from your new structured package
 from src.tree_analyzer.models import grounded_segmentation
@@ -50,6 +50,20 @@ def main():
     # Assuming the first detection is the plant and the second is the trunk
     plant_mask = detections[0].mask
     trunk_mask = detections[1].mask if len(detections) > 1 else None
+
+    # save masks for analysis
+    output_dir = 'output'
+    os.makedirs(output_dir, exist_ok=True)  # Ensure output directory exists
+
+    plant_mask_path = os.path.join(output_dir, 'plant_mask.png')
+    plt.imsave(plant_mask_path, plant_mask, cmap='gray')
+    print(f"Plant mask saved to: {plant_mask_path}")
+
+
+    if trunk_mask is not None:
+        trunk_mask_path = os.path.join(output_dir, 'trunk_mask.png')
+        plt.imsave(trunk_mask_path, trunk_mask, cmap='gray')
+        print(f"Trunk mask saved to: {trunk_mask_path}")
 
 
     # --- Display detected masks ---
