@@ -33,4 +33,6 @@ grounded_segmentation_project/
 ```
 
 ## Grounded SAM + ArUco Marker (V3) - AWS
-Send all the codes to AWS.
+- send all the codes to AWS and it can be executed successfully
+- only minor modification to `requirements.txt`
+- Steps to run the model were saved in Notion

@@ -5,3 +5,7 @@ __pycache__/
 .vscode/
 env/
 .venv/
+.jpg
+.png
+.jpeg
+.gif
