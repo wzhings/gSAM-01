@@ -33,4 +33,4 @@ grounded_segmentation_project/
 ```
 
 ## Grounded SAM + ArUco Marker (V3) - AWS
-to-do
+Send all the codes to AWS.
