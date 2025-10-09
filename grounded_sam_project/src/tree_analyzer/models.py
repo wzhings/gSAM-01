@@ -25,19 +25,20 @@ def detect(
 
 def segment(
     image: Image.Image,
-    detection_results: List[DetectionResult],
+    detection_results: List[Dict[str, Any]],
     polygon_refinement: bool = False,
-    segmenter_id: str = "facebook/sam-vit-base"
+    segmenter_id:  Optional[str] = None
 ) -> List[DetectionResult]:
-    """Uses Segment Anything Model (SAM) to generate masks from bounding boxes."""
+    """
+    Uses Segment Anything Model (SAM) to generate masks from bounding boxes.
+    """
     device = "cuda" if torch.cuda.is_available() else "cpu"
+    segmenter_id = segmenter_id if segmenter_id is not None else "facebook/sam-vit-base"
+
     segmentator = AutoModelForMaskGeneration.from_pretrained(segmenter_id).to(device)
     processor = AutoProcessor.from_pretrained(segmenter_id)
     
     boxes = get_boxes_from_detections(detection_results)
-    if not boxes or not boxes[0]:  # No detections found
-        return detection_results
-
     inputs = processor(images=image, input_boxes=boxes, return_tensors="pt").to(device)
     outputs = segmentator(**inputs)
     
@@ -55,21 +56,18 @@ def segment(
     return detection_results
 
 def grounded_segmentation(
-    image_path: str,
+    image_path: Union[Image.Image, str],
     labels: List[str],
     threshold: float = 0.3,
     polygon_refinement: bool = False,
-    detector_id: str = "IDEA-Research/grounding-dino-tiny",
-    segmenter_id: str = "facebook/sam-vit-base"
+    detector_id: Optional[str] = None,
+    segmenter_id: Optional[str] = None
 ) -> Tuple[np.ndarray, List[DetectionResult]]:
     """Performs the full pipeline: load, detect, and segment."""
-    image = load_image(image_path)
+    if isinstance(image_path, str):
+        image = load_image(image_path)
     
-    detections = detect(image, labels, threshold, detector_id)
-    if not detections:
-        print("No objects detected.")
-        return np.array(image), []
-        
-    detections_with_masks = segment(image, detections, polygon_refinement, segmenter_id)
-    
-    return np.array(image), detections_with_masks
+    detections = detect(image, labels, threshold, detector_id)        
+    detections = segment(image, detections, polygon_refinement, segmenter_id)
+
+    return np.array(image), detections

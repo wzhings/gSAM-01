@@ -15,7 +15,7 @@ def load_image(image_str: str) -> Image.Image:
         image = Image.open(image_str).convert("RGB")
     return image
 
-def get_boxes_from_detections(results: List[DetectionResult]) -> List[List[List[float]]]:
+def get_boxes_from_detections(results: DetectionResult) -> List[List[List[float]]]:
     """Extracts bounding box coordinates from a list of detection results."""
     boxes = []
     for result in results:
