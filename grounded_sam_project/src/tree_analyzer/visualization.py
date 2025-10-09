@@ -1,4 +1,4 @@
-import random
+import random,os
 from typing import Any, List, Dict, Optional, Union
 import numpy as np
 import cv2
@@ -42,6 +42,7 @@ def plot_detections_matplotlib(
     plt.imshow(annotated_image)
     plt.axis('off')
     if save_path:
+        os.mkdir('output', exist_ok=True) # Ensure output directory exists
         plt.savefig(save_path, bbox_inches='tight')
     plt.show()
 
