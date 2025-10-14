@@ -1,5 +1,6 @@
 markers/
 photos/
+grounded_sam_project/data/new_tree_photos_251010/
 *.pyc
 __pycache__/
 .vscode/

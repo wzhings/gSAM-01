@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 import numpy as np
 
-src_path = "photos/square_10_2.jpg"
+src_path = "photos/acuro_36.jpg"
 img = mpimg.imread(src_path)
 fig, ax = plt.subplots()
 ax.imshow(img)
