@@ -1,7 +1,8 @@
 # requirements.txt
 
 # Installs a stable version of transformers compatible with sentence-transformers
-transformers<5.0.0,>=4.41.0
+#transformers<5.0.0,>=4.41.0
+git+https://github.com/huggingface/transformers
 
 # This package requires the specific transformers version above
 sentence-transformers
@@ -9,7 +10,7 @@ sentence-transformers
 # Other standard dependencies
 torch
 opencv-python-headless
-numpy==1.26.4
+numpy
 Pillow
 plotly
 matplotlib
