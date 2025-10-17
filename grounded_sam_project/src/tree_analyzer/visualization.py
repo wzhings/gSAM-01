@@ -10,6 +10,7 @@ import plotly.graph_objects as go
 from .data_structures import DetectionResult
 from .processing import mask_to_polygon
 
+
 def annotate(image: np.ndarray, detection_results: List[DetectionResult]) -> np.ndarray:
     """Draws bounding boxes and masks on an image."""
     image_cv2 = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
